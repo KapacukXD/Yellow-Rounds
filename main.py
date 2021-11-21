@@ -1,14 +1,14 @@
 from random import randrange
 import sys
-from PyQt5 import uic
 from PyQt5.QtGui import QColor, QPainter
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from UI import Ui_Form
 
 
-class Rounds(QMainWindow):
+class Rounds(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.do_paint = False
         self.btn.clicked.connect(self.paint)
         self.n = 7
@@ -28,9 +28,10 @@ class Rounds(QMainWindow):
         for i in range(self.n):
             a, b = randrange(100, 900), randrange(100, 500)
             l = randrange(50, 200)
-            color = QColor(255, 255, 0)
+            color = QColor(randrange(0, 255), randrange(0, 255), randrange(0, 255))
             qp.setBrush(color)
             qp.drawEllipse(a - int(l / 2), b - int(l / 2), l, l)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
